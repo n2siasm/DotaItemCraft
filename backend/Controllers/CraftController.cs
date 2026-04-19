@@ -3,37 +3,107 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [ApiController]
-[Route("[controller]")]
-public class CraftController: ControllerBase
+[Route("/Craft")]
+public class CraftController : ControllerBase
 {
 	private readonly AppDbContext dbContext;
-	public CraftController(AppDbContext dbContext) => this.dbContext = dbContext;
+	public CraftController(AppDbContext dbContext)
+	{
+		this.dbContext = dbContext;
+		items = dbContext.Items.ToList();
+		itemComponents = dbContext.ItemComponents.ToList();
+	}
+	public List<Item> items;
+	public List<ItemComponent> itemComponents;
+
 
 	[HttpGet("random-compound")]
-	public async Task<IActionResult> GetRandomCompound()
+	public IActionResult GetRandomCompound()
 	{
-		var compoundItems = await dbContext.Items
-			.Where(i => dbContext.ItemComponents.Any(ic => ic.ParentGuid == i.Guid))
-			.ToListAsync();
+		var compoundItems = items
+			.Where(i => itemComponents.Any(ic => ic.ParentGuid == i.Guid))
+			.ToList();
 
 		if (!compoundItems.Any())
-			return NotFound(new {error = "No compound items found"});
+			return NotFound(new { error = "No compound items found" });
 
 		var random = new Random();
-		var selected = compoundItems[random.Next(compoundItems.Count)];
+		var selectedParent = compoundItems[random.Next(compoundItems.Count)];
 
-		var componentGuids = await dbContext.ItemComponents
-			.Where(ic => ic.ParentGuid == selected.Guid)
-			.Select(ic => new {ic.ComponentGuid})
-			.ToListAsync();
+		var selectedComponents = itemComponents
+			.Where(ic => ic.ParentGuid == selectedParent.Guid)
+			.ToList();
 
 		return Ok(new
 		{
-			guid = selected.Guid,
-			name = selected.Name,
-			components = componentGuids
+			Guid = selectedParent.Guid,
+			Name = selectedParent.Name,
+			Img = selectedParent.Img,
+			Components = selectedComponents
+				.Select(i => new
+				{
+					Guid = i.ComponentGuid,
+
+				})
+				.ToList(),
 		});
 
+	}
+
+	[HttpGet("all-items")]
+	public IActionResult GetAllItems()
+	{
+		return Ok(items);
+
+	}
+
+	[HttpPost("check")]
+	public ActionResult<CraftCheckResponse> Check([FromBody] CraftCheckRequest request)
+	{
+
+		var componentEntries = itemComponents.Where(i => i.ParentGuid == request.TargetGuid).ToList();
+		Console.WriteLine("СУКААААААА"+componentEntries.Count);
+
+		var componentItems = new List<Item>();
+		foreach (var component in componentEntries)
+		{
+			componentItems.Add(items.Where(i => i.Guid == component.ComponentGuid).First());
+		}
+		var isValid = CompareItems(componentItems, request.Items);
+
+		return Ok(new CraftCheckResponse
+		{
+			Success = isValid
+		});
+	}
+
+	private bool CompareItems(
+    List<Item> required,
+    List<CraftItemDto> provided)
+	{
+		if(required.Count != provided.Count)
+		{
+			return false;
+		}
+		foreach (var requiredItem in required)
+		{
+			bool found = false;
+			foreach (var providedItem in provided)
+			{
+				Console.WriteLine(requiredItem.Guid + "===" + providedItem.Guid);
+				if (requiredItem.Guid == providedItem.Guid)
+				{
+					found = true;
+					break;
+				}
+			}
+
+			if (!found)
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

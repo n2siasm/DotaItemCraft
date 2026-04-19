@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #111;
+  color: white;
+}
+
+.game {
+  text-align: center;
+  transition: opacity 0.5s;
+}
+
+.fade {
+  opacity: 0;
+}
+
+.target {
+  width: 100px;
+  margin: 20px;
+}
+
+.slots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.slot {
+  width: 60px;
+  height: 60px;
+  border: 2px dashed gray;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 50px);
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.item {
+  width: 50px;
+  cursor: grab;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.hud {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
+
+button.wrong {
+	background: red;
+  }
+
+  .slot img {
+	width: 100%;
+  }
+
+  .slot {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }

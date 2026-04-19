@@ -8,20 +8,7 @@ public class AppDbContext: DbContext
 	public DbSet<ItemComponent> ItemComponents {get; set;}
 
 	protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite("Data Source=Untitled");
-	protected override void OnModelCreating(ModelBuilder modelBuilder)
-	{
-		modelBuilder.Entity<ItemComponent>()
-			.HasOne(ic => ic.Parent)
-			.WithMany(i => i.ParentComponents)
-			.HasForeignKey(ic => ic.ParentGuid)
-			.OnDelete(DeleteBehavior.Cascade);
-
-		modelBuilder.Entity<ItemComponent>()
-			.HasOne(ic => ic.Component)
-			.WithMany(i => i.ChildComponents)
-			.HasForeignKey(ic => ic.ComponentGuid)
-			.OnDelete(DeleteBehavior.Cascade);
-	}
+	protected override void OnModelCreating(ModelBuilder modelBuilder) {}
 
 
 

@@ -10,8 +10,4 @@ public class ItemComponent
 	public string? ParentGuid {get; set;}
 	[Column("componentGuid"), Required]
 	public string? ComponentGuid {get; set;}
-
-	public Item Parent {get; set;} = null!;
-	public Item Component {get; set;} = null!;
-
 }

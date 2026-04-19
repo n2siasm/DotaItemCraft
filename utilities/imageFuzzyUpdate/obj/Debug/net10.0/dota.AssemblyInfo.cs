@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("dota")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b5a417ec05e629f86be3e5c6091fb3a288eacfef")]
 [assembly: System.Reflection.AssemblyProductAttribute("dota")]
 [assembly: System.Reflection.AssemblyTitleAttribute("dota")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

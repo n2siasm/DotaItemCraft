@@ -12,7 +12,6 @@ public class Item
 	public int? Cost {get; set;}
 	[Column("img")]
 	public string? Img {get; set;}
-
-	public ICollection<ItemComponent> ParentComponents {get; set;} = new List<ItemComponent>();
-	public ICollection<ItemComponent> ChildComponents {get; set;} = new List<ItemComponent>();
+	[Column("isRecipe")]
+	public int ? IsRecipe {get; set;}
 }

@@ -992,11 +992,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/mnt/hdd500-linux/stor/dota/site/backend/backend.csproj",
+      "projectUniqueName": "/mnt/hdd500-linux/stor/dota/backend/backend.csproj",
       "projectName": "backend",
-      "projectPath": "/mnt/hdd500-linux/stor/dota/site/backend/backend.csproj",
+      "projectPath": "/mnt/hdd500-linux/stor/dota/backend/backend.csproj",
       "packagesPath": "/home/nissian202/.nuget/packages/",
-      "outputPath": "/mnt/hdd500-linux/stor/dota/site/backend/obj/",
+      "outputPath": "/mnt/hdd500-linux/stor/dota/backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/nissian202/.nuget/NuGet/NuGet.Config"
