@@ -1,4 +1,4 @@
-# Dota Item Craft (v0.1)
+# Dota Item Craft (v1.0)
 Web application mini-game for crafting items relevant to DotA 2 7.41b
 
 ## Site
