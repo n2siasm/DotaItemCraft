@@ -4,7 +4,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.ConfigureKestrel(options =>
 {
-options.ListenLocalhost(5000);
+	//options.ListenLocalhost(5000);
+	options.ListenAnyIP(5000);
 });
 
 builder.Services.AddControllers();
@@ -16,11 +17,12 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(connect
 
 builder.Services.AddCors(options =>
 {
-	options.AddPolicy("AllowAll", policy =>
+	options.AddPolicy("AllowFrontend", policy =>
 	{
-		policy.AllowAnyOrigin()
+		policy.WithOrigins("http://localhost:5137")
 			.AllowAnyMethod()
-			.AllowAnyHeader();
+			.AllowAnyHeader()
+			.AllowCredentials();
 	});
 });
 
@@ -34,7 +36,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowAll");
-app.UseHttpsRedirection();
 app.MapControllers();
 app.UseRouting();
 app.Run();
+
+using (var scope = app.Services.CreateScope())
+{
+	var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+	context.Database.Migrate();
+}

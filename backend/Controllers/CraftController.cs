@@ -90,7 +90,12 @@ public class CraftController : ControllerBase
 			bool found = false;
 			foreach (var providedItem in provided)
 			{
-				Console.WriteLine(requiredItem.Guid + "===" + providedItem.Guid);
+				if(requiredItem.IsRecipe == 1 && providedItem.Guid == "-1")
+				{
+					found = true;
+					break;
+				}
+
 				if (requiredItem.Guid == providedItem.Guid)
 				{
 					found = true;

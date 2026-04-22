@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/mnt/hdd500-linux/stor/dota/backend/backend.csproj": {}
+    "/mnt/hdd500-linux/stor/dotaActivity/backend/backend.csproj": {}
   },
   "projects": {
-    "/mnt/hdd500-linux/stor/dota/backend/backend.csproj": {
+    "/mnt/hdd500-linux/stor/dotaActivity/backend/backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/mnt/hdd500-linux/stor/dota/backend/backend.csproj",
+        "projectUniqueName": "/mnt/hdd500-linux/stor/dotaActivity/backend/backend.csproj",
         "projectName": "backend",
-        "projectPath": "/mnt/hdd500-linux/stor/dota/backend/backend.csproj",
+        "projectPath": "/mnt/hdd500-linux/stor/dotaActivity/backend/backend.csproj",
         "packagesPath": "/home/nissian202/.nuget/packages/",
-        "outputPath": "/mnt/hdd500-linux/stor/dota/backend/obj/",
+        "outputPath": "/mnt/hdd500-linux/stor/dotaActivity/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/nissian202/.nuget/NuGet/NuGet.Config"
